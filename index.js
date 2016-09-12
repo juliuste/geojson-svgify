@@ -1,7 +1,6 @@
 'use strict'
 
 const svg = require('virtual-hyperscript-svg')
-const stringify = require('virtual-dom-stringify')
 const mercator = require('mercator-projection').fromLatLngToPoint
 
 
@@ -22,11 +21,11 @@ const parsePoint = (point) => point.join(',')
 const parsePointList = (pointList) => pointList.map(parsePoint).join(' ')
 
 const drawPath = (pointList) => {
-	return stringify(svg('polyline', {
+	return svg('polyline', {
 		points: parsePointList(pointList),
 		stroke: config.lineColor,
 		"stroke-width": config.lineWidth
-	}))
+	})
 }
 
 const paths = (geojson) => {
@@ -53,12 +52,12 @@ const paths = (geojson) => {
 const draw = (geojson, options) => {
 	config = Object.assign({}, config, options || {})
 
-	let result = ''
+	let result = []
 	for(let path of paths(geojson)){
-		result += drawPath(project(path))
+		result.push(drawPath(project(path)))
 	}
 
-	return result || null
+	return result
 }
 
 module.exports = draw

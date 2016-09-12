@@ -1,6 +1,6 @@
 # geojson-svgify
 
-Convert GeoJSON geometry paths to SVG polyline strings.
+Convert GeoJSON geometry paths to SVG polyline elements.
 
 [![npm version](https://img.shields.io/npm/v/geojson-svgify.svg)](https://www.npmjs.com/package/geojson-svgify)
 [![dependency status](https://img.shields.io/david/juliuste/geojson-svgify.svg)](https://david-dm.org/juliuste/geojson-svgify)
@@ -25,7 +25,7 @@ const options = {
 	projection: ([lon, lat]) => [x, y] // default: mercator transformation
 }
 
-console.log(svgify(geoJSON, options))
+console.log(svgify(geoJSON, options)) // [VirtualDOM SVG polyline Object, …]
 ```
 
 ## Contributing

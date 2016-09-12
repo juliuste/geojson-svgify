@@ -1,7 +1,7 @@
 {
   "name": "geojson-svgify",
-  "description": "Convert GeoJSON geometry paths to SVG polyline strings",
-  "version": "0.1.0",
+  "description": "Convert GeoJSON geometry paths to SVG polyline elements",
+  "version": "0.2.0",
   "keywords": [
     "geojson",
     "svg",
@@ -18,7 +18,6 @@
   ],
   "dependencies": {
     "mercator-projection": "0.0.2",
-    "virtual-dom-stringify": "^3.0.1",
     "virtual-hyperscript-svg": "^2.0.0"
   },
   "devDependencies": {},
