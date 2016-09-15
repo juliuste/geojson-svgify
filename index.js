@@ -30,6 +30,7 @@ const drawPath = (pointList) => {
 }
 
 const paths = (geojson) => {
+	geojson = flatten(geojson)
 	let result = []
 	if(geojson.type=='FeatureCollection'){
 		for(let feature of geojson.features){
