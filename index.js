@@ -4,15 +4,13 @@ const svg = require('virtual-hyperscript-svg')
 const mercator = require('mercator-projection').fromLatLngToPoint
 const flatten = require('geojson-flatten')
 
-
-
 let config = {
 	projection: (coords) => {
 		const projected = mercator({lng: coords[0], lat: coords[1]})
 		return [projected.x, projected.y]
 	},
 	lineColor: '#000',
-	lineWidth: 5
+	lineWidth: .1
 }
 
 
@@ -25,7 +23,8 @@ const drawPath = (pointList) => {
 	return svg('polyline', {
 		points: parsePointList(pointList),
 		stroke: config.lineColor,
-		"stroke-width": config.lineWidth
+		"stroke-width": config.lineWidth,
+		fill: 'none'
 	})
 }
 

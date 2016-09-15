@@ -1,7 +1,7 @@
 {
   "name": "geojson-svgify",
   "description": "Convert GeoJSON geometry paths to SVG polyline elements",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "keywords": [
     "geojson",
     "svg",
