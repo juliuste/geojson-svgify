@@ -1,6 +1,6 @@
 # geojson-svgify
 
-Convert GeoJSON geometry paths to SVG polyline elements.
+Convert GeoJSON geometry paths to VirtualDOM SVG polyline elements.
 
 [![npm version](https://img.shields.io/npm/v/geojson-svgify.svg)](https://www.npmjs.com/package/geojson-svgify)
 [![dependency status](https://img.shields.io/david/juliuste/geojson-svgify.svg)](https://david-dm.org/juliuste/geojson-svgify)

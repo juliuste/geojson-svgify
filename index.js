@@ -2,6 +2,7 @@
 
 const svg = require('virtual-hyperscript-svg')
 const mercator = require('mercator-projection').fromLatLngToPoint
+const flatten = require('geojson-flatten')
 
 
 
@@ -29,24 +30,17 @@ const drawPath = (pointList) => {
 }
 
 const paths = (geojson) => {
+	let result = []
 	if(geojson.type=='FeatureCollection'){
 		for(let feature of geojson.features){
 			if(feature.geometry.type=='Polygon'){
-				return feature.geometry.coordinates[0]
+				result.push(feature.geometry.coordinates[0])
 			}
-			if(feature.geometry.type=='MultiPolygon'){
-				let result = []
-				for(let coordinates of feature.geometry.coordinates){
-					for(let path of coordinates){
-						result.push(path)
-					}
-				}
-				return result
-			}
-			throw new Error('This GeoJSON geometry type is not supported (yet). Type: '+feature.geometry.type)
+			else throw new Error('This GeoJSON geometry type is not supported (yet). Type: '+feature.geometry.type)
 		}
 	}
 	else throw new Error('This GeoJSON type is not supported (yet). Type: '+geojson.type)
+	return result
 }
 
 const draw = (geojson, options) => {
