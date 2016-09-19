@@ -7,12 +7,12 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# Use tabs in JavaScript and JSON.
-[**.{js,json}]
+# Use tabs in JavaScript.
+[**.js]
 indent_style = tab
 indent_size = 4
 
-# Use spaces in YAML.
-[**.{yml,yaml}]
+# Use spaces in YAML and JSON.
+[**.{yml,yaml,json}]
 indent_style = spaces
 indent_size = 2

@@ -4,29 +4,11 @@ const svg = require('virtual-hyperscript-svg')
 const mercator = require('mercator-projection').fromLatLngToPoint
 const flatten = require('geojson-flatten')
 
-let config = {
-	projection: (coords) => {
-		const projected = mercator({lng: coords[0], lat: coords[1]})
-		return [projected.x, projected.y]
-	},
-	lineColor: '#000',
-	lineWidth: .1
-}
-
-
-const project = (wgsList) => wgsList.map(config.projection)
-
-const parsePoint = (point) => point.join(',')
-const parsePointList = (pointList) => pointList.map(parsePoint).join(' ')
-
-const drawPath = (pointList) => {
-	return svg('polyline', {
-		points: parsePointList(pointList),
-		stroke: config.lineColor,
-		"stroke-width": config.lineWidth,
-		fill: 'none'
+const drawPath = (points, stroke, strokeWidth) =>
+	svg('polyline', {
+		points: points.map((point) => point.join(',')).join(' '),
+		fill: 'none', stroke, "stroke-width": strokeWidth
 	})
-}
 
 const paths = (geojson) => {
 	geojson = flatten(geojson)
@@ -43,15 +25,21 @@ const paths = (geojson) => {
 	return result
 }
 
-const draw = (geojson, options) => {
-	config = Object.assign({}, config, options || {})
-
-	let result = []
-	for(let path of paths(geojson)){
-		result.push(drawPath(project(path)))
-	}
-
-	return result
+const defaults = {
+	projection: ([lng, lat]) => {
+		const {x, y} = mercator({lng, lat})
+		return [x, y]
+	},
+	lineColor: '#000',
+	lineWidth: .1
 }
 
-module.exports = draw
+const draw = (geojson, opt) => {
+	opt = Object.assign({}, defaults, opt || {})
+
+	return paths(geojson)
+	.map((points) => points.map(opt.projection))
+	.map((points) => drawPath(points, opt.lineColor, opt.lineWidth))
+}
+
+module.exports = Object.assign(draw, {defaults})
