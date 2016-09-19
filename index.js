@@ -4,15 +4,6 @@ const svg = require('virtual-hyperscript-svg')
 const mercator = require('mercator-projection').fromLatLngToPoint
 const flatten = require('geojson-flatten')
 
-const defaults = {
-	projection: (coords) => {
-		const projected = mercator({lng: coords[0], lat: coords[1]})
-		return [projected.x, projected.y]
-	},
-	lineColor: '#000',
-	lineWidth: .1
-}
-
 const drawPath = (points, stroke, strokeWidth) =>
 	svg('polyline', {
 		points: points.map((point) => point.join(',')).join(' '),
@@ -32,6 +23,15 @@ const paths = (geojson) => {
 	}
 	else throw new Error('This GeoJSON type is not supported (yet). Type: '+geojson.type)
 	return result
+}
+
+const defaults = {
+	projection: ([lng, lat]) => {
+		const {x, y} = mercator({lng, lat})
+		return [x, y]
+	},
+	lineColor: '#000',
+	lineWidth: .1
 }
 
 const draw = (geojson, opt) => {

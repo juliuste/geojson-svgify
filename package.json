@@ -6,9 +6,13 @@
     "geojson",
     "svg",
     "coordinates",
-    "paths"
+    "paths",
+    "virtual-dom"
   ],
   "author": "Julius Tens <mail@juliustens.de>",
+  "contributors": [
+    "Jannis R <mail@jannisr.de>"
+  ],
   "homepage": "https://github.com/juliuste/geojson-svgify",
   "repository": "juliuste/geojson-svgify",
   "bugs": "https://github.com/juliuste/geojson-svgify/issues",
