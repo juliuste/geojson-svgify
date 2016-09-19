@@ -3,9 +3,10 @@
 **Convert [GeoJSON](http://geojson.org/) to [virtual-dom](https://github.com/Matt-Esch/virtual-dom#virtual-dom) `<polyline>` nodes** using the projection of your choice.
 
 [![npm version](https://img.shields.io/npm/v/geojson-svgify.svg)](https://www.npmjs.com/package/geojson-svgify)
+[![build status](https://img.shields.io/travis/juliuste/geojson-svgify.svg)](https://travis-ci.org/juliuste/geojson-svgify)
 [![dependency status](https://img.shields.io/david/juliuste/geojson-svgify.svg)](https://david-dm.org/juliuste/geojson-svgify)
 [![dev dependency status](https://img.shields.io/david/dev/juliuste/geojson-svgify.svg)](https://david-dm.org/juliuste/geojson-svgify#info=devDependencies)
-[![MIT License](https://img.shields.io/badge/license-MIT-black.svg)](https://opensource.org/licenses/MIT)
+[![license](https://img.shields.io/github/license/juliuste/geojson-svgify.svg?style=flat)](LICENSE)
 
 ## Installation
 
@@ -45,9 +46,9 @@ The GeoJSON you pass in will be flattened using [`geojson-flatten`](https://gith
 const svgify = require('geojson-svgify')
 
 const polylines = svgify(geoJSON, {
-	lineWidth: 10, 		// default is 5
-	lineColor: '#f60',	// default is '#000'
-	projection: myProjection
+    lineWidth: 10,      // default is 5
+    lineColor: '#f60',  // default is '#000'
+    projection: myProjection
 })
 ```
 
@@ -65,9 +66,9 @@ const width = right - left
 const height = north - south
 
 const svg = h('svg', {
-	width: Math.abs(width) * 100,
-	height: Math.abs(height) * 100,
-	viewBox: [left, top, width, height].join(',')
+    width: Math.abs(width) * 100,
+    height: Math.abs(height) * 100,
+    viewBox: [left, top, width, height].join(',')
 }, polylines)
 ```
 
