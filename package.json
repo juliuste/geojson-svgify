@@ -21,8 +21,14 @@
     "mercator-projection": "0.0.2",
     "virtual-hyperscript-svg": "^2.0.0"
   },
-  "devDependencies": {},
-  "scripts": {},
+  "devDependencies": {
+    "@turf/bbox": "^3.5.2",
+    "virtual-dom-stringify": "^3.0.1",
+    "disparity": "^2"
+  },
+  "scripts": {
+    "test": "node test/index.js"
+  },
   "engine": {
     "node": ">=6"
   },
