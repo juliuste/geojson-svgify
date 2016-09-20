@@ -63,7 +63,7 @@ const [west, south, east, north] = bbox(geojson)
 const [left, top] = svgify.defaults.projection([west, north])
 const [right, bottom] = svgify.defaults.projection([east, south])
 const width = right - left
-const height = north - south
+const height = bottom - top
 
 const svg = h('svg', {
     width: Math.abs(width) * 100,
