@@ -1,7 +1,7 @@
 'use strict'
 
 const svg = require('virtual-hyperscript-svg')
-const mercator = require('mercator-projection').fromLatLngToPoint
+const mercator = require('projections/p/mercator')
 const flatten = require('geojson-flatten')
 
 const drawPath = (points, stroke, strokeWidth) =>
@@ -26,9 +26,9 @@ const paths = (geojson) => {
 }
 
 const defaults = {
-	projection: ([lng, lat]) => {
-		const {x, y} = mercator({lng, lat})
-		return [x, y]
+	projection: ([lon, lat]) => {
+		const {x, y} = mercator({lon, lat})
+		return [x * 100, y * 100] // todo
 	},
 	lineColor: '#000',
 	lineWidth: .1

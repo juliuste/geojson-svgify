@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "geojson-flatten": "^0.2.0",
-    "mercator-projection": "0.0.2",
+    "projections": "^0.6",
     "virtual-hyperscript-svg": "^2.0.0"
   },
   "devDependencies": {
