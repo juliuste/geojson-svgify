@@ -11,6 +11,12 @@ const disparity = require('disparity')
 // data from https://gist.github.com/pfloh/ae03cdabca0c822d5283
 const fixture = fs.readFileSync(path.join(__dirname, 'berlin.svg'), 'utf8')
 
+const assertEqualString = (a, b) => {
+	if (a === b) return
+	process.stdout.write(disparity.chars(a, b) + '\n')
+	process.exit(1)
+}
+
 
 
 const geojson = require('./berlin.json')
@@ -23,12 +29,9 @@ const width = right - left
 const height = bottom - top
 
 const generated = toHTML(h('svg', {
-	width: Math.abs(width) * 1000,
-	height: Math.abs(height) * 1000,
+	width: 600,
+	height: Math.abs(height) / Math.abs(width) * 600,
 	viewBox: [left, top, width, height].join(',')
 }, polylines))
 
-if (generated !== fixture) {
-	process.stdout.write(disparity.chars(generated, fixture) + '\n')
-	process.exit(1)
-}
+assertEqualString(generated, fixture)
