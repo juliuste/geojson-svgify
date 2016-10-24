@@ -1,7 +1,7 @@
 'use strict'
 
 const svg = require('virtual-hyperscript-svg')
-const mercator = require('projections/p/mercator')
+const mercator = require('projections/mercator')
 const flatten = require('geojson-flatten')
 
 const drawPath = (points, stroke, strokeWidth) =>
