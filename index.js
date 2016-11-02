@@ -4,10 +4,10 @@ const svg = require('virtual-hyperscript-svg')
 const mercator = require('projections/mercator')
 const flatten = require('geojson-flatten')
 
-const drawPath = (points, stroke, strokeWidth) =>
+const drawPath = (points, className) =>
 	svg('polyline', {
 		points: points.map((point) => point.join(',')).join(' '),
-		className: 'shape'
+		className
 	})
 
 const paths = (geojson) => {
