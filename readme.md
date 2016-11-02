@@ -55,15 +55,15 @@ const h = require('virtual-hyperscript-svg')
 
 const [west, south, east, north] = bbox(geojson)
 
-const [left, top] = svgify.defaults.projection([west, north])
-const [right, bottom] = svgify.defaults.projection([east, south])
+const [left, top] = myProjection([west, north])
+const [right, bottom] = myProjection([east, south])
 const width = right - left
 const height = bottom - top
 
 const styles = h('style', {}, `
 	.shape {
 		stroke: #f60;
-		stroke-width: 10;
+		stroke-width: .05;
 		fill: none;
 	}
 `)
