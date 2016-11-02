@@ -20,7 +20,7 @@ const assertEqualString = (a, b) => {
 
 
 const geojson = require('./berlin.json')
-const polylines = svgify(geojson, {lineWidth: .001})
+const polylines = svgify(geojson)
 
 const [west, south, east, north] = bbox(geojson)
 const [left, top] = svgify.defaults.projection([west, north])
@@ -28,10 +28,18 @@ const [right, bottom] = svgify.defaults.projection([east, south])
 const width = right - left
 const height = bottom - top
 
+const styles = h('style', {}, `
+	.shape {
+		stroke: black;
+		stroke-width: .001;
+		fill: none;
+	}
+`)
+
 const generated = toHTML(h('svg', {
 	width: 600,
 	height: Math.abs(height) / Math.abs(width) * 600,
 	viewBox: [left, top, width, height].join(',')
-}, polylines))
+}, [].concat(styles, polylines)))
 
 assertEqualString(generated, fixture)

@@ -7,7 +7,7 @@ const flatten = require('geojson-flatten')
 const drawPath = (points, stroke, strokeWidth) =>
 	svg('polyline', {
 		points: points.map((point) => point.join(',')).join(' '),
-		fill: 'none', stroke, "stroke-width": strokeWidth
+		className: 'shape'
 	})
 
 const paths = (geojson) => {
@@ -30,8 +30,7 @@ const defaults = {
 		const {x, y} = mercator({lon, lat})
 		return [x * 100, y * 100] // todo
 	},
-	lineColor: '#000',
-	lineWidth: .1
+	className: 'shape'
 }
 
 const draw = (geojson, opt) => {
@@ -39,7 +38,7 @@ const draw = (geojson, opt) => {
 
 	return paths(geojson)
 	.map((points) => points.map(opt.projection))
-	.map((points) => drawPath(points, opt.lineColor, opt.lineWidth))
+	.map((points) => drawPath(points, opt.className))
 }
 
 module.exports = Object.assign(draw, {defaults})
