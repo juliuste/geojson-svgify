@@ -23,8 +23,7 @@ svgify(geojson, [options])
 `geojson` must be an object in the [GeoJSON format](http://geojson.org/). `options` may have the following keys:
 
 - `projection` – A function with the signature `([longitude, latitude]) => [x, y]`. Default: [`mercator-projection`](https://github.com/zacbarton/node-mercator-projection#readme)
-- `lineColor` – Any [CSS-compatible color](https://developer.mozilla.org/en-US/docs/Web/CSS/color). Default: `#000`
-- `lineWidth` – Any [SVG-compatible stroke width](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width). Default: `.1`
+- `className` – Class name of all elements being generated. Default: `shape`
 
 ## Guide
 
@@ -45,11 +44,7 @@ The GeoJSON you pass in will be flattened using [`geojson-flatten`](https://gith
 ```js
 const svgify = require('geojson-svgify')
 
-const polylines = svgify(geoJSON, {
-    lineWidth: 10,      // default is 5
-    lineColor: '#f60',  // default is '#000'
-    projection: myProjection
-})
+const polylines = svgify(geoJSON, {projection: myProjection})
 ```
 
 **`polylines` will be an array of [virtual-dom](https://github.com/Matt-Esch/virtual-dom#virtual-dom) `<polyline>` nodes.** You may want to wrap them in an `<svg>` that fits their size:
@@ -60,16 +55,24 @@ const h = require('virtual-hyperscript-svg')
 
 const [west, south, east, north] = bbox(geojson)
 
-const [left, top] = svgify.defaults.projection([west, north])
-const [right, bottom] = svgify.defaults.projection([east, south])
+const [left, top] = myProjection([west, north])
+const [right, bottom] = myProjection([east, south])
 const width = right - left
 const height = bottom - top
+
+const styles = h('style', {}, `
+	.shape {
+		stroke: #f60;
+		stroke-width: .05;
+		fill: none;
+	}
+`)
 
 const svg = h('svg', {
     width: Math.abs(width) * 100,
     height: Math.abs(height) * 100,
     viewBox: [left, top, width, height].join(',')
-}, polylines)
+}, [].concat(styles, polylines)))
 ```
 
 If you want to convert the virtual DOM tree to HTML, use [`virtual-dom-stringify`]:
