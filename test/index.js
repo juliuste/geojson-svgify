@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const bbox = require('@turf/bbox')
 const h = require('virtual-hyperscript-svg')
+const mercator = require('projections/mercator')
 const svgify = require('../index')
 const toHTML = require('virtual-dom-stringify')
 const disparity = require('disparity')
@@ -19,8 +20,17 @@ const assertEqualString = (a, b) => {
 
 
 
+const projection = ([lon, lat]) => {
+	const {x, y} = mercator({lon, lat})
+	// Rounding floating point errors to make the tests robust.
+	return [
+		Math.round(x * 1000000) / 10000,
+		Math.round(y * 1000000) / 10000
+	]
+}
+
 const geojson = require('./berlin.json')
-const polylines = svgify(geojson)
+const polylines = svgify(geojson, {projection})
 
 const [west, south, east, north] = bbox(geojson)
 const [left, top] = svgify.defaults.projection([west, north])
