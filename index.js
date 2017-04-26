@@ -4,26 +4,11 @@ const svg = require('virtual-hyperscript-svg')
 const mercator = require('projections/mercator')
 const flatten = require('geojson-flatten')
 
-const drawPath = (points, props) =>
-	svg('polyline', Object.assign({}, props, {
-		points: points.map((point) => point.join(',')).join(' ')
-	}))
-
-const paths = (geojson, projection, computeProps) => {
-	geojson = flatten(geojson)
-	const result = []
-	if(geojson.type=='FeatureCollection'){
-		for(let feature of geojson.features){
-			if(feature.geometry.type=='Polygon'){
-				const points = feature.geometry.coordinates[0].map(projection)
-				const props = computeProps(feature)
-				result.push({points, props})
-			}
-			else throw new Error('This GeoJSON geometry type is not supported (yet). Type: '+feature.geometry.type)
-		}
-	}
-	else throw new Error('This GeoJSON type is not supported (yet). Type: '+geojson.type)
-	return result
+const invalidType = (type) => {
+	return new Error(`The ${type} GeoJSON type is not supported yet.`)
+}
+const invalidGeometryType = (type) => {
+	return new Error(`The ${type} GeoJSON geometry type is not supported yet.`)
 }
 
 const defaults = {
@@ -39,8 +24,25 @@ const defaults = {
 const draw = (geojson, opt) => {
 	opt = Object.assign({}, defaults, opt || {})
 
-	return paths(geojson, opt.projection, opt.computeProps)
-	.map(({points, props}) => drawPath(points, props))
+	const flattened = flatten(geojson)
+	const polylines = []
+
+	if (flattened.type !== 'FeatureCollection') throw invalidType(flattened.type)
+	for (let feature of flattened.features) {
+		const g = feature.geometry
+		if (g.type !== 'Polygon') throw invalidGeometryType(g.type)
+
+		const points = g.coordinates[0]
+			.map(opt.projection)
+			.map((point) => point.join(','))
+			.join(' ')
+		const props = opt.computeProps(feature)
+
+		const el = svg('polyline', Object.assign({}, props, {points}))
+		polylines.push(el)
+	}
+
+	return polylines
 }
 
 module.exports = Object.assign(draw, {defaults})
