@@ -10,13 +10,14 @@ const drawPath = (points, className) =>
 		className
 	})
 
-const paths = (geojson) => {
+const paths = (geojson, projection) => {
 	geojson = flatten(geojson)
-	let result = []
+	const result = []
 	if(geojson.type=='FeatureCollection'){
 		for(let feature of geojson.features){
 			if(feature.geometry.type=='Polygon'){
-				result.push(feature.geometry.coordinates[0])
+				const projected = feature.geometry.coordinates[0].map(projection)
+				result.push(projected)
 			}
 			else throw new Error('This GeoJSON geometry type is not supported (yet). Type: '+feature.geometry.type)
 		}
@@ -36,8 +37,7 @@ const defaults = {
 const draw = (geojson, opt) => {
 	opt = Object.assign({}, defaults, opt || {})
 
-	return paths(geojson)
-	.map((points) => points.map(opt.projection))
+	return paths(geojson, opt.projection)
 	.map((points) => drawPath(points, opt.className))
 }
 
