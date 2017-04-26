@@ -23,7 +23,7 @@ svgify(geojson, [options])
 `geojson` must be an object in the [GeoJSON format](http://geojson.org/). `options` may have the following keys:
 
 - `projection` – A function with the signature `([longitude, latitude]) => [x, y]`. Default: [`mercator-projection`](https://github.com/zacbarton/node-mercator-projection#readme)
-- `className` – Class name of all elements being generated. Default: `shape`
+- `computeProps` – A function that will compute the attributes of the `<polyline>` element, given the GeoJSON feature. By default, it will add a `shape` `class`.
 
 ## Guide
 

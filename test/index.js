@@ -10,7 +10,7 @@ const toHTML = require('virtual-dom-stringify')
 const disparity = require('disparity')
 
 // data from https://gist.github.com/pfloh/ae03cdabca0c822d5283
-const fixture = fs.readFileSync(path.join(__dirname, 'berlin.svg'), 'utf8')
+const fixture = fs.readFileSync(path.join(__dirname, 'berlin.svg'), 'utf8').trim()
 
 const assertEqualString = (a, b) => {
 	if (a === b) return

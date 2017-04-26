@@ -22,11 +22,11 @@
   ],
   "dependencies": {
     "geojson-flatten": "^0.2.0",
-    "projections": "^0.6",
+    "projections": "^1.0.0",
     "virtual-hyperscript-svg": "^2.0.0"
   },
   "devDependencies": {
-    "@turf/bbox": "^3.5.2",
+    "@turf/bbox": "^4.1.0",
     "virtual-dom-stringify": "^3.0.1",
     "disparity": "^2"
   },
