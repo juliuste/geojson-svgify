@@ -72,7 +72,7 @@ const svg = h('svg', {
     width: Math.abs(width) * 100,
     height: Math.abs(height) * 100,
     viewBox: [left, top, width, height].join(',')
-}, [].concat(styles, polylines)))
+}, [].concat(styles, polylines))
 ```
 
 If you want to convert the virtual DOM tree to HTML, use [`virtual-dom-stringify`]:
