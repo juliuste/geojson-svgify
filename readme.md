@@ -1,5 +1,7 @@
 # geojson-svgify
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/juliuste/geojson-svgify.svg)](https://greenkeeper.io/)
+
 **Convert [GeoJSON](http://geojson.org/) to [virtual-dom](https://github.com/Matt-Esch/virtual-dom#virtual-dom) `<polyline>` nodes** using the projection of your choice.
 
 [![npm version](https://img.shields.io/npm/v/geojson-svgify.svg)](https://www.npmjs.com/package/geojson-svgify)
