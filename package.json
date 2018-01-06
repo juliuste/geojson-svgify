@@ -31,7 +31,8 @@
     "disparity": "^2"
   },
   "scripts": {
-    "test": "node test/index.js"
+    "test": "node test/index.js",
+    "prepare": "npm test"
   },
   "engine": {
     "node": ">=6"
