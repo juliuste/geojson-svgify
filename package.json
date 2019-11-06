@@ -28,7 +28,7 @@
   "devDependencies": {
     "@turf/bbox": "^5.0.0",
     "virtual-dom-stringify": "^3.0.1",
-    "disparity": "^2"
+    "disparity": "^3.0.0"
   },
   "scripts": {
     "test": "node test/index.js",
