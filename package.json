@@ -21,7 +21,7 @@
     "index.js"
   ],
   "dependencies": {
-    "geojson-flatten": "^0.2.0",
+    "geojson-flatten": "^1.0.4",
     "projections": "^1.0.0",
     "virtual-hyperscript-svg": "^2.0.0"
   },
