@@ -34,7 +34,7 @@
     "test": "node test/index.js",
     "prepare": "npm test"
   },
-  "engine": {
+  "engines": {
     "node": ">=6"
   },
   "license": "MIT"
