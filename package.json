@@ -21,21 +21,21 @@
     "index.js"
   ],
   "dependencies": {
-    "geojson-flatten": "^0.2.0",
+    "geojson-flatten": "^1.0.4",
     "projections": "^1.0.0",
     "virtual-hyperscript-svg": "^2.0.0"
   },
   "devDependencies": {
-    "@turf/bbox": "^5.0.0",
+    "@turf/bbox": "^6.5.0",
     "virtual-dom-stringify": "^3.0.1",
-    "disparity": "^2"
+    "disparity": "^3.2.0"
   },
   "scripts": {
     "test": "node test/index.js",
     "prepare": "npm test"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=18"
   },
   "license": "MIT"
 }

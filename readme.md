@@ -48,7 +48,7 @@ const polylines = svgify(geoJSON, {projection: myProjection})
 **`polylines` will be an array of [virtual-dom](https://github.com/Matt-Esch/virtual-dom#virtual-dom) `<polyline>` nodes.** You may want to wrap them in an `<svg>` that fits their size:
 
 ```js
-const bbox = require('@turf/bbox')
+const {default: bbox} = require('@turf/bbox')
 const h = require('virtual-hyperscript-svg')
 
 const [west, south, east, north] = bbox(geojson)

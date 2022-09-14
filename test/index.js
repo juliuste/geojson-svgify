@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const bbox = require('@turf/bbox')
+const {default: bbox} = require('@turf/bbox')
 const h = require('virtual-hyperscript-svg')
 const mercator = require('projections/mercator')
 const svgify = require('../index')
