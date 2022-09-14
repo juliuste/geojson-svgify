@@ -28,9 +28,13 @@
   "devDependencies": {
     "@turf/bbox": "^6.5.0",
     "virtual-dom-stringify": "^3.0.1",
-    "disparity": "^3.2.0"
+    "disparity": "^3.2.0",
+    "eslint": "^8.23.1",
+    "eslint-config-standard": "^17.0.0"
   },
   "scripts": {
+    "fix": "npm run lint -- --fix",
+    "lint": "eslint .",
     "test": "node test/index.js",
     "prepare": "npm test"
   },
