@@ -53,3 +53,34 @@ const generated = toHTML(h('svg', {
 }, [].concat(styles, polylines)))
 
 assertEqualString(generated, fixture)
+
+{
+	const berlin2Geojson = require('./berlin2.geo.json')
+	const berlin2Expected = fs.readFileSync(path.join(__dirname, 'berlin2.svg'), 'utf8').trim()
+
+	const polylines = svgify(geojson, {projection})
+
+	const [west, south, east, north] = bbox(berlin2Geojson)
+	const [left, top] = svgify.defaults.projection([west, north])
+	const [right, bottom] = svgify.defaults.projection([east, south])
+	const width = right - left
+	const height = bottom - top
+
+	const styles = h('style', {}, `
+		.shape {
+			stroke: black;
+			stroke-width: .001;
+			fill: none;
+		}
+	`)
+
+	const berlin2Svg = toHTML(h('svg', {
+		width: 600,
+		height: Math.abs(height) / Math.abs(width) * 600,
+		viewBox: [left, top, width, height].join(',')
+	}, [].concat(styles, polylines)))
+
+	assertEqualString(berlin2Svg, berlin2Expected)
+}
+
+console.info('seems to work ✓')
