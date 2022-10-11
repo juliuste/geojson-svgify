@@ -13,12 +13,12 @@ const invalidGeometryType = (type) => {
 
 const defaults = {
 	computeProps: (feature) => ({
-		className: 'shape'
+		className: 'shape',
 	}),
 	projection: ([lon, lat]) => {
-		const {x, y} = mercator({lon, lat})
+		const { x, y } = mercator({ lon, lat })
 		return [x * 100, y * 100] // todo
-	}
+	},
 }
 
 const draw = (geojson, opt) => {
@@ -28,7 +28,7 @@ const draw = (geojson, opt) => {
 	const polylines = []
 
 	if (flattened.type !== 'FeatureCollection') throw invalidType(flattened.type)
-	for (let feature of flattened.features) {
+	for (const feature of flattened.features) {
 		const g = feature.geometry
 		if (g.type !== 'Polygon') throw invalidGeometryType(g.type)
 
@@ -38,11 +38,11 @@ const draw = (geojson, opt) => {
 			.join(' ')
 		const props = opt.computeProps(feature)
 
-		const el = svg('polyline', Object.assign({}, props, {points}))
+		const el = svg('polyline', Object.assign({}, props, { points }))
 		polylines.push(el)
 	}
 
 	return polylines
 }
 
-module.exports = Object.assign(draw, {defaults})
+module.exports = Object.assign(draw, { defaults })

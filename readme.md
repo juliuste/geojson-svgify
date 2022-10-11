@@ -3,10 +3,6 @@
 **Convert [GeoJSON](http://geojson.org/) to [virtual-dom](https://github.com/Matt-Esch/virtual-dom#virtual-dom) `<polyline>` nodes** using the projection of your choice.
 
 [![npm version](https://img.shields.io/npm/v/geojson-svgify.svg)](https://www.npmjs.com/package/geojson-svgify)
-[![Build Status](https://travis-ci.org/juliuste/geojson-svgify.svg?branch=master)](https://travis-ci.org/juliuste/geojson-svgify)
-[![Greenkeeper badge](https://badges.greenkeeper.io/juliuste/geojson-svgify.svg)](https://greenkeeper.io/)
-[![dependency status](https://img.shields.io/david/juliuste/geojson-svgify.svg)](https://david-dm.org/juliuste/geojson-svgify)
-[![dev dependency status](https://img.shields.io/david/dev/juliuste/geojson-svgify.svg)](https://david-dm.org/juliuste/geojson-svgify#info=devDependencies)
 [![license](https://img.shields.io/github/license/juliuste/geojson-svgify.svg?style=flat)](LICENSE)
 [![chat on gitter](https://badges.gitter.im/juliuste.svg)](https://gitter.im/juliuste)
 
@@ -52,7 +48,7 @@ const polylines = svgify(geoJSON, {projection: myProjection})
 **`polylines` will be an array of [virtual-dom](https://github.com/Matt-Esch/virtual-dom#virtual-dom) `<polyline>` nodes.** You may want to wrap them in an `<svg>` that fits their size:
 
 ```js
-const bbox = require('@turf/bbox')
+const {default: bbox} = require('@turf/bbox')
 const h = require('virtual-hyperscript-svg')
 
 const [west, south, east, north] = bbox(geojson)
